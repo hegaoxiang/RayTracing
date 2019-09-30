@@ -1,0 +1,1 @@
+需要DirectXmath规范。即一般类里面用XMFLOAT3之类，运算时候再转换成XMVECTOR
