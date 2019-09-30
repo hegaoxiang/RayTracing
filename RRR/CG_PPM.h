@@ -5,8 +5,8 @@
 
 using std::string;
 using std::array;
-const int SCREEN_HEIGHT = 600;
-const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 1920;
+const int SCREEN_WIDTH = 1080;
 
 class CG_PPM
 {
@@ -20,6 +20,11 @@ public:
 		{
 			fill(item.begin(), item.end(), RGB{ 0,0,0 });
 		}
+	}
+	void Resize(int width, int height)
+	{
+		m_bufferWidth = width;
+		m_bufferHeight = height;
 	}
 	void SetPixel(int x, int y, RGB color);
 

@@ -7,6 +7,7 @@ constexpr int MAX_HEIGHT = 600;
 
 class Canvas
 {
+	
 public:
 	Canvas(int width, int height) :
 		m_sceenHeight(height),

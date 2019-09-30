@@ -17,7 +17,7 @@ void CG_PPM::Display()
 	{
 		for (int i = 0; i < m_bufferWidth; i++)
 		{
-			file << (m_buffer[j][i].x) << " " << (m_buffer[j][i].y) << " " << (m_buffer[j][i].z) << "\n";
+			file << static_cast<int>(m_buffer[j][i].x) << " " << static_cast<int>(m_buffer[j][i].y) << " " << static_cast<int>(m_buffer[j][i].z) << "\n";
 		}
 	}
 	file.close();
