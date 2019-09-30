@@ -16,3 +16,5 @@ typedef Vector3 RGB;
 XMFLOAT3 mul(XMFLOAT3 v1, float t);
 
 XMFLOAT3 puls(XMFLOAT3 v1, XMFLOAT3 v2);
+
+XMFLOAT3 sub(XMFLOAT3 vl, XMFLOAT3 vr);

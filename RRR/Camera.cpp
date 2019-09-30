@@ -26,7 +26,8 @@ Camera::Camera(Canvas* canvas, Point eyePos, Point target, float dist)
 	XMStoreFloat3(&m_forward, forward);
 	XMStoreFloat3(&m_right, right);
 	XMStoreFloat3(&m_up, up);
-}*/
+}
+*/
 /*
 Ray Camera::GetRay(int x, int y)
 {
@@ -42,6 +43,15 @@ Ray Camera::GetRay(int x, int y)
 
 	return Ray(m_origin, dir);
 }*/
+Camera::Camera(Canvas* canvas)
+{
+	m_canvas = canvas;
+	m_lower_left_corner = Point{ -2.0,-1.0,-1.0 };
+	m_horizontal = Point{ 4.0,0.0,0.0 };
+	m_vertical = Direction{ 0.0,2.0,0.0 };
+	m_origin = Direction{ 0.0,0.0,0.0 };
+}
+
 Ray Camera::GetRay(int x, int y)
 {
 	float u = static_cast<float>(x) / m_canvas->m_sceenWidth;
@@ -51,8 +61,8 @@ Ray Camera::GetRay(int x, int y)
 	auto vertical = XMLoadFloat3(&m_vertical);
 	auto lower_left_corner = XMLoadFloat3(&m_lower_left_corner);
 
-	XMFLOAT3 dir;
-	XMStoreFloat3(&dir, XMVector3Normalize(lower_left_corner + u * horizontal + v * vertical));
+	XMFLOAT3 target;
+	XMStoreFloat3(&target, XMVector3Normalize(lower_left_corner + u * horizontal + v * vertical));
 
-	return Ray{ Point{m_origin},Direction{dir} };
+	return Ray{ Point{m_origin},Point{target} };
 }
