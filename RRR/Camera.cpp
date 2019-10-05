@@ -47,7 +47,7 @@ Camera::Camera(Canvas* canvas)
 {
 	m_canvas = canvas;
 	m_lower_left_corner = Point{ -2.0,-1.0,-1.0 };
-	m_horizontal = Point{ 4.0,0.0,0.0 };
+	m_horizontal = Direction{ 4.0,0.0,0.0 };
 	m_vertical = Direction{ 0.0,2.0,0.0 };
 	m_origin = Direction{ 0.0,0.0,0.0 };
 }

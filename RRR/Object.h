@@ -18,6 +18,8 @@ typedef struct HitRecord
 	bool m_bHit;
 	RGB m_color;
 	float m_t;
+
+	Direction m_normal;
 }HitRecord;/*
 class HitRecord
 {

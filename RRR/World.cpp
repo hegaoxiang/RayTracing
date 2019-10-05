@@ -12,11 +12,11 @@ void World::SetCamera(Camera& camera)
 
 void World::Render()
 {
-	Canvas *canvas = (m_camera->m_canvas);
+	Canvas &canvas = *(m_camera->m_canvas);
 	Ray *ray;
-	for (int i = 0; i < canvas->m_sceenWidth; i++)
+	for (int i = 0; i < canvas.m_sceenWidth; i++)
 	{
-		for (int j = 0; j < canvas->m_sceenHeight; j++)
+		for (int j = 0; j < canvas.m_sceenHeight; j++)
 		{
 			ray = &(m_camera->GetRay(i, j));
 			
@@ -26,7 +26,7 @@ void World::Render()
 			color.x *= 255.99;
 			color.y *= 255.99;
 			color.z *= 255.99;
-			canvas->SetPixel(i, j, color);
+			canvas.SetPixel(i, j, color);
 		}
 	}
 }

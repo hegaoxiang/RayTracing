@@ -8,6 +8,7 @@ public:
 		m_target(target)
 	{
 		m_dir = sub(m_target, m_origin);
+		m_dir = unit(m_dir);
 	}
 
 	Point PointAtPara(float t)const;
