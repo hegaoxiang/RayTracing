@@ -10,7 +10,7 @@ public:
 		m_dir = sub(m_target, m_origin);
 		m_dir = unit(m_dir);
 	}
-
+	Point operator()(float t)const;
 	Point PointAtPara(float t)const;
 	
 public:

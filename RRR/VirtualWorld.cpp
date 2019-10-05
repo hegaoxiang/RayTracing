@@ -14,22 +14,26 @@ VirtualWorld::VirtualWorld()
 RGB VirtualWorld::Color(Ray& ray)
 {
 	HitRecord hitRecord;
-
+	HitRecord tempHitR;
+	float closestSoFar = INFINITY;
+	int objIdx = -1;
+	int i = -1;
 	for (auto obj : m_pObj)
 	{
-		HitRecord tempHR = obj->Hit(ray);
-		if (tempHR.m_t > 0 && tempHR.m_t < hitRecord.m_t)
+		++i;
+		if (obj->Hit(ray, 0, closestSoFar, tempHitR))
 		{
-			hitRecord = tempHR;
+			closestSoFar = tempHitR.m_t;
+			objIdx = i;
 		}
 	}
-	if (hitRecord.m_bHit)
+	if (-1 != objIdx)
 	{
+		hitRecord = tempHitR;
 		return mul(puls(hitRecord.m_normal, XMFLOAT3{ 1,1,1 }),0.5);
-		//return hitRecord.m_color;
+		
 	}
 
-	
 	float t = 0.5 * (ray.m_dir.y + 1.0);
 	return puls(mul(XMFLOAT3{ 1.0,1.0,1.0 }, (1.0 - t)), mul(XMFLOAT3{0.5,0.7,1.0},t));
 	

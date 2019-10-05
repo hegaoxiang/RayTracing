@@ -11,14 +11,13 @@ typedef struct Material
 typedef struct HitRecord
 {
 	HitRecord() :
-		m_color(RGB{ 1,1,1 }), m_t(INFINITY), m_bHit(false)
+		m_color(RGB{ 1,1,1 }), m_t(INFINITY)
 	{
 
 	}
-	bool m_bHit;
 	RGB m_color;
 	float m_t;
-
+	Point m_hitPoint;
 	Direction m_normal;
 }HitRecord;/*
 class HitRecord
@@ -47,7 +46,7 @@ HitRecord::~HitRecord()
 class Object
 {
 public:
-	virtual HitRecord Hit(const Ray& ray);
+	virtual bool Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord);
 
 public:
 	Material m_material;

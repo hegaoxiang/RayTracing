@@ -1,7 +1,7 @@
 #include "Object.h"
 #include"Ray.h"
 
-HitRecord Object::Hit(const Ray& ray)
+bool Object::Hit(const Ray& ray,float t_min,float t_max, HitRecord& hitRecord)
 {
-	return HitRecord();
+	return true;
 }

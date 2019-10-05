@@ -7,10 +7,10 @@
 //  t*d*normal = -(p-o)*normal 
 //  t = -(p-o)*normal / d*normal
 
-HitRecord Plane::Hit(const Ray& ray)
-{
-	HitRecord hitInfo;
 
+
+bool Plane::Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord)
+{
 	auto o = XMLoadFloat3(&m_center);
 	auto normal = XMLoadFloat3(&m_normal);
 
@@ -23,12 +23,18 @@ HitRecord Plane::Hit(const Ray& ray)
 	float denominator = XMVectorGetX(XMVector3Dot(d, normal));
 	if (denominator != 0)
 	{
-		hitInfo.m_t = (-XMVectorGetX(XMVector3Dot(pSubO, normal))) / denominator;
-		hitInfo.m_bHit = true;
-		hitInfo.m_color = RGB{ 0.7,0.7,0 };
-		hitInfo.m_normal = m_normal;
+		float t = (-XMVectorGetX(XMVector3Dot(pSubO, normal))) / denominator;
+
+		if (t_min < t && t < t_max)
+		{
+			Point hitPoint = ray(t);
+			hitRecord.m_t = t;
+			hitRecord.m_hitPoint = hitPoint;
+			hitRecord.m_normal = m_normal;
+
+			return true;
+		}
+		
+		return false;
 	}
-	else
-		hitInfo.m_t = -1;
-	return hitInfo;
 }
