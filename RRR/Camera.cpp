@@ -43,19 +43,17 @@ Ray Camera::GetRay(int x, int y)
 
 	return Ray(m_origin, dir);
 }*/
-Camera::Camera(Canvas* canvas)
+Camera::Camera()
 {
-	m_canvas = canvas;
 	m_lower_left_corner = Point{ -2.0,-1.0,-1.0 };
 	m_horizontal = Direction{ 4.0,0.0,0.0 };
 	m_vertical = Direction{ 0.0,2.0,0.0 };
 	m_origin = Direction{ 0.0,0.0,0.0 };
 }
 
-Ray Camera::GetRay(int x, int y)
+Ray Camera::GetRay(float u, float v)
 {
-	float u = static_cast<float>(x) / m_canvas->m_sceenWidth;
-	float v = static_cast<float>(y) / m_canvas->m_sceenHeight;
+	
 
 	auto horizontal = XMLoadFloat3(&m_horizontal);
 	auto vertical = XMLoadFloat3(&m_vertical);

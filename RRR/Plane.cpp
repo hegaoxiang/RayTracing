@@ -26,6 +26,7 @@ HitRecord Plane::Hit(const Ray& ray)
 		hitInfo.m_t = (-XMVectorGetX(XMVector3Dot(pSubO, normal))) / denominator;
 		hitInfo.m_bHit = true;
 		hitInfo.m_color = RGB{ 0.7,0.7,0 };
+		hitInfo.m_normal = m_normal;
 	}
 	else
 		hitInfo.m_t = -1;

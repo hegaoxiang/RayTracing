@@ -6,8 +6,8 @@ class Camera
 {
 public:
 	Camera(Canvas* canvas, Point eyePos, Point target,float dist = 1.0f);
-	Camera(Canvas* canvas);
-	Ray GetRay(int x, int y);
+	Camera();
+	Ray GetRay(float u, float v);
 	
 public:
 	
@@ -27,6 +27,6 @@ public:
 	Direction m_vertical;
 	
 public:
-	Canvas *m_canvas;
+
 };
 

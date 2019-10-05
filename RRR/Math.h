@@ -22,3 +22,4 @@ XMFLOAT3 sub(XMFLOAT3 vl, XMFLOAT3 vr);
 float dot(XMFLOAT3 v1, XMFLOAT3 v2);
 
 XMFLOAT3 unit(XMFLOAT3 v);
+float drand48();

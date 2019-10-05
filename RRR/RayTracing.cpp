@@ -11,9 +11,9 @@ int main()
 
 	Vector3 target{ 0, 0, 3 };
 
-	auto camera = new Camera(canvas);
+	auto camera = new Camera();
 	
-	auto world = new World();
+	auto world = new World(camera,canvas);
 
 	world->SetCamera(*camera);
 

@@ -13,6 +13,7 @@ XMFLOAT3 sub(XMFLOAT3 vl, XMFLOAT3 vr)
 {
 	return XMFLOAT3{ vl.x - vr.x, vl.y - vr.y, vl.z - vr.z };
 }
+
 float dot(XMFLOAT3 v1, XMFLOAT3 v2)
 {
 	auto vec1 = XMLoadFloat3(&v1);
@@ -30,4 +31,9 @@ XMFLOAT3 unit(XMFLOAT3 v)
 	XMStoreFloat3(&v, vec);
 
 	return v;
+}
+
+float drand48()
+{
+	return 0;
 }
