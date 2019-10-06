@@ -1,5 +1,5 @@
 #pragma once
-
+#include<random>
 #include<DirectXMath.h>
 using namespace DirectX;
 using DirectX::XMLoadFloat3;
@@ -21,5 +21,7 @@ XMFLOAT3 sub(XMFLOAT3 vl, XMFLOAT3 vr);
 
 float dot(XMFLOAT3 v1, XMFLOAT3 v2);
 
+float length(XMFLOAT3 p);
+
 XMFLOAT3 unit(XMFLOAT3 v);
-float drand48();
+float drand();

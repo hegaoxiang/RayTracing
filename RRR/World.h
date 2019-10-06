@@ -8,6 +8,7 @@ using std::vector;
 
 class World
 {
+
 public:
 	World(Camera* camera, Canvas* canvas) :
 		m_camera(camera), m_canvas(canvas)
@@ -19,5 +20,6 @@ public:
 	void SetWorld();
 	void SetCamera(Camera& camera);
 	void Render();
+	RGB Color(const Ray& ray);
 };
 

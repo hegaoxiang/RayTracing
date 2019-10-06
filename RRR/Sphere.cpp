@@ -23,6 +23,7 @@ bool Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord)
 		if (t_min < t && t < t_max)
 		{
 			Point hitPoint = ray(t);
+			hitRecord.m_isHit = true;
 			hitRecord.m_t = t;
 			hitRecord.m_hitPoint = hitPoint;
 			hitRecord.m_normal = unit(sub(hitPoint, m_orgin));
@@ -33,6 +34,7 @@ bool Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord)
 		if (t_min < t && t < t_max)
 		{
 			Point hitPoint = ray(t);
+			hitRecord.m_isHit = true;
 			hitRecord.m_t = t;
 			hitRecord.m_hitPoint = hitPoint;
 			hitRecord.m_normal = unit(sub(hitPoint, m_orgin));

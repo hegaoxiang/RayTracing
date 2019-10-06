@@ -6,43 +6,22 @@ class Ray;
 typedef struct Material
 {
 	RGB m_rgb;
+
 }Material;
 
 typedef struct HitRecord
 {
 	HitRecord() :
-		m_color(RGB{ 1,1,1 }), m_t(INFINITY)
+		m_color(RGB{ 1,1,1 }), m_t(INFINITY),m_isHit(false)
 	{
 
 	}
 	RGB m_color;
+	bool m_isHit;
 	float m_t;
 	Point m_hitPoint;
 	Direction m_normal;
-}HitRecord;/*
-class HitRecord
-{
-public:
-	HitRecord() :
-		m_color(RGB{ 1,1,1 }), m_t(INFINITY), m_bHit(false)
-	{
-
-	}
-	~HitRecord();
-
-	bool m_bHit;
-	RGB m_color;
-	float m_t;
-private:
-
-};
-
-
-HitRecord::~HitRecord()
-{
-}
-
-*/
+}HitRecord;
 class Object
 {
 public:
@@ -51,4 +30,6 @@ public:
 public:
 	Material m_material;
 };
+Direction RandomInUnitSphere();
+
 

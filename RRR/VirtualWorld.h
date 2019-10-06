@@ -9,7 +9,7 @@ class VirtualWorld
 {
 public:
 	VirtualWorld();
-	RGB Color(Ray& ray);
+	bool Hit(const Ray& ray,float tMin,float tMax,HitRecord& record);
 	
 	std::vector<Object*> m_pObj;
 };

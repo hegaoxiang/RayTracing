@@ -22,6 +22,13 @@ float dot(XMFLOAT3 v1, XMFLOAT3 v2)
 	return XMVectorGetX(XMVector3Dot(vec1, vec2));
 }
 
+float length(XMFLOAT3 p)
+{
+	auto vp = XMLoadFloat3(&p);
+
+	return XMVectorGetX(XMVector3Length(vp));
+}
+
 XMFLOAT3 unit(XMFLOAT3 v)
 {
 	auto vec = XMLoadFloat3(&v);
@@ -33,7 +40,7 @@ XMFLOAT3 unit(XMFLOAT3 v)
 	return v;
 }
 
-float drand48()
+float drand()
 {
-	return 0;
+	return static_cast<float>(rand()) / RAND_MAX;
 }
