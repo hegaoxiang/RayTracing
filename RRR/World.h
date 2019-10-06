@@ -20,6 +20,6 @@ public:
 	void SetWorld();
 	void SetCamera(Camera& camera);
 	void Render();
-	RGB Color(const Ray& ray);
+	Vec3 Color(const Ray& ray, int depth);
 };
 

@@ -1,21 +1,23 @@
 #pragma once
 #include"Math.h"
+
 class Ray
 {
 public:
-	Ray(Point orgin, Point target) :
+	Ray() {}
+	Ray(Vec3 orgin, Vec3 target) :
 		m_origin(orgin),
 		m_target(target)
 	{
-		m_dir = sub(m_target, m_origin);
-		m_dir = unit(m_dir);
+		m_dir = m_target- m_origin;
+		m_dir = m_dir.UnitVector();
 	}
-	Point operator()(float t)const;
-	Point PointAtPara(float t)const;
+	Vec3 operator()(float t)const;
+	Vec3 PointAtPara(float t)const;
 	
 public:
-	Point m_origin;
-	Point m_target;
-	Direction m_dir;
+	Vec3 m_origin;
+	Vec3 m_target;
+	Vec3 m_dir;
 };
 

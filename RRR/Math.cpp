@@ -1,46 +1,39 @@
 #include"Math.h"
 
-XMFLOAT3 mul(XMFLOAT3 v1, float t)
-{
-	return XMFLOAT3{ v1.x * t,v1.y * t,v1.z * t };
-}
-XMFLOAT3 puls(XMFLOAT3 v1, XMFLOAT3 v2)
-{
-	return XMFLOAT3{ v1.x + v2.x,v1.y + v2.y,v1.z + v2.z };
-}
-
-XMFLOAT3 sub(XMFLOAT3 vl, XMFLOAT3 vr)
-{
-	return XMFLOAT3{ vl.x - vr.x, vl.y - vr.y, vl.z - vr.z };
-}
-
-float dot(XMFLOAT3 v1, XMFLOAT3 v2)
-{
-	auto vec1 = XMLoadFloat3(&v1);
-	auto vec2 = XMLoadFloat3(&v2);
-
-	return XMVectorGetX(XMVector3Dot(vec1, vec2));
-}
-
-float length(XMFLOAT3 p)
-{
-	auto vp = XMLoadFloat3(&p);
-
-	return XMVectorGetX(XMVector3Length(vp));
-}
-
-XMFLOAT3 unit(XMFLOAT3 v)
-{
-	auto vec = XMLoadFloat3(&v);
-
-	vec = XMVector3Normalize(vec);
-
-	XMStoreFloat3(&v, vec);
-
-	return v;
-}
 
 float drand()
 {
 	return static_cast<float>(rand()) / RAND_MAX;
+}
+
+float Dot(const Vec3& v1, const Vec3& v2)
+{
+	auto vec1 = XMLoadFloat3(&v1.m);
+	auto vec2 = XMLoadFloat3(&v2.m);
+
+	return XMVectorGetX(XMVector3Dot(vec1, vec2));
+}
+
+
+// other func for CG
+Vec3 RandomInUnitSphere()
+{
+	Vec3 p;
+	do
+	{
+		p = 2 * (Vec3{ drand(),drand(),drand() } -Vec3{ 0.5f,0.5f,0.5f });
+	} while (p.Length() >= 1.0f);
+	return p;
+}
+
+Vec3 Reflect(const Vec3& v, const Vec3& n)
+{
+	Vec3 ans;
+
+	auto incident = XMLoadFloat3(&v.m);
+	auto normal = XMLoadFloat3(&n.m);
+
+	XMStoreFloat3(&ans.GetXMFLOAT3(),XMVector3Reflect(incident, normal));
+
+	return ans;
 }

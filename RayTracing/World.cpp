@@ -21,7 +21,7 @@ void World::Render()
 			Ray ray = m_camera->GetRay(i, j);
 			
 			// calculate the color that belongs to the ray
-			RGB color =  m_world.Color(ray);
+			Vec3 color =  m_world.Color(ray);
 
 			canvas.SetPixel(i, j, color);
 		}

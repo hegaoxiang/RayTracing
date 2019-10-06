@@ -4,17 +4,21 @@
 class Sphere : public Object
 {
 public:
-	Sphere(Point o, double radius):
+	Sphere(Vec3 o, double radius,Material *material):
 		m_orgin(o),m_radius(radius)
 	{
-		m_material.m_rgb = RGB{ 0.8,0,0 };
+		m_pMaterial = material;
 	}
 	// 通过 Object 继承
 	virtual bool Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord);
 
 public:
-	Point	m_orgin;
+	Vec3	m_orgin;
 	double		m_radius;
+
+
+	// 通过 Object 继承
+	virtual HitRecord GetHitRecord(const Vec3& hitPoint) override;
 
 };
 

@@ -3,7 +3,7 @@
 #include"Math.h"
 using namespace std;
 
-void CG_PPM::SetPixel(int x, int y, RGB color)
+void CG_PPM::SetPixel(int x, int y, Vec3 color)
 {
 	m_buffer[y][x] = color;
 }
@@ -17,7 +17,7 @@ void CG_PPM::Display()
 	{
 		for (int i = 0; i < m_bufferWidth; i++)
 		{
-			file << static_cast<int>(m_buffer[j][i].x) << " " << static_cast<int>(m_buffer[j][i].y) << " " << static_cast<int>(m_buffer[j][i].z) << "\n";
+			file << static_cast<int>(m_buffer[j][i].X()) << " " << static_cast<int>(m_buffer[j][i].Y()) << " " << static_cast<int>(m_buffer[j][i].Z()) << "\n";
 		}
 	}
 	file.close();

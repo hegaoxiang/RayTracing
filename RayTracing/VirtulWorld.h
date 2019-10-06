@@ -5,6 +5,6 @@
 class VirtualWorld
 {
 public:
-	RGB Color(Ray& ray)const;
+	Vec3 Color(Ray& ray)const;
 };
 

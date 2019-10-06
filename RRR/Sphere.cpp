@@ -4,17 +4,17 @@
 
 bool Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord)
 {
-	auto o = XMLoadFloat3(&m_orgin);
-	auto p = XMLoadFloat3(&ray.m_origin);
+	//auto o = XMLoadFloat3(&m_orgin);
+	//auto p = XMLoadFloat3(&ray.m_origin);
+	//
+	//auto pSubO = p - o;
+	auto pSubO = ray.m_origin - m_orgin;
 
-	auto pSubO = p - o;
+	//auto d = XMLoadFloat3(&ray.m_dir);
 
-	auto d = XMLoadFloat3(&ray.m_dir);
-
-	// xmvector3dot计算得到一个vector，其中每个分量都是点积值。
-	float A = XMVectorGetX(XMVector3Dot(d, d));
-	float B = 2 * XMVectorGetX(XMVector3Dot(d, pSubO));
-	float C = XMVectorGetX(XMVector3Dot(pSubO, pSubO)) - powf(m_radius, 2);
+	float A = Dot(ray.m_dir, ray.m_dir);
+	float B = 2 * Dot(ray.m_dir, pSubO);
+	float C = Dot(pSubO, pSubO) - m_radius * m_radius;
 
 	float discriminant = B * B - 4 * A * C;
 	if (discriminant >= 0)
@@ -22,25 +22,33 @@ bool Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord)
 		float t = (-B - sqrtf(discriminant)) / 2 * A;
 		if (t_min < t && t < t_max)
 		{
-			Point hitPoint = ray(t);
+			Vec3 hitPoint = ray(t);
+			hitRecord = GetHitRecord(hitPoint);
 			hitRecord.m_isHit = true;
 			hitRecord.m_t = t;
-			hitRecord.m_hitPoint = hitPoint;
-			hitRecord.m_normal = unit(sub(hitPoint, m_orgin));
-
+			
 			return true;
 		}
 		t = (-B + sqrtf(discriminant)) / 2 * A;
 		if (t_min < t && t < t_max)
 		{
-			Point hitPoint = ray(t);
+			Vec3 hitPoint = ray(t);
+			hitRecord = GetHitRecord(hitPoint);
 			hitRecord.m_isHit = true;
 			hitRecord.m_t = t;
-			hitRecord.m_hitPoint = hitPoint;
-			hitRecord.m_normal = unit(sub(hitPoint, m_orgin));
 
 			return true;
 		}
 	}
 	return false;
+}
+
+HitRecord Sphere::GetHitRecord(const Vec3& hitPoint)
+{
+	HitRecord hitRecord;
+
+	hitRecord.m_hitPoint = hitPoint;
+	hitRecord.m_normal = (hitPoint - m_orgin).UnitVector();
+	hitRecord.m_pMateril = m_pMaterial;
+	return hitRecord;
 }

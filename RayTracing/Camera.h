@@ -5,16 +5,16 @@
 class Camera
 {
 public:
-	Camera(Canvas* canvas, Point eyePos, Point target,float dist = 3.0f);
+	Camera(Canvas* canvas, Vec3 eyePos, Vec3 target,float dist = 3.0f);
 	Ray GetRay(int x, int y);
 	
 public:
-	Point m_origin;
+	Vec3 m_origin;
 
 	// ÓÒÊÖ×ø±êÏµ unit vector
-	Direction m_forward;
-	Direction m_right;
-	Direction m_up;
+	Vec3 m_forward;
+	Vec3 m_right;
+	Vec3 m_up;
 
 	float m_viewDist;
 

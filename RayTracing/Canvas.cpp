@@ -24,7 +24,7 @@ void Canvas::Display()
 
 }
 
-void Canvas::SetPixel(int x, int y, RGB color)
+void Canvas::SetPixel(int x, int y, Vec3 color)
 {
 	m_buffer[y][x] = color;
 }

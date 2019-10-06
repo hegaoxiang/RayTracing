@@ -1,5 +1,5 @@
-#include"CG_PPM.h"
 #include "Canvas.h"
+#include"CG_PPM.h"
 #include<fstream>
 using namespace std;
 
@@ -11,7 +11,7 @@ void Canvas::Display()
 	g_CGppm.Display();
 }
 
-void Canvas::SetPixel(int x, int y, RGB color)
+void Canvas::SetPixel(int x, int y, Vec3 color)
 {
 	g_CGppm.SetPixel(x, y, color);
 }

@@ -3,33 +3,29 @@
 #include"Math.h"
 
 class Ray;
-typedef struct Material
-{
-	RGB m_rgb;
-
-}Material;
-
+class Material;
 typedef struct HitRecord
 {
 	HitRecord() :
-		m_color(RGB{ 1,1,1 }), m_t(INFINITY),m_isHit(false)
+		 m_pMateril(nullptr), m_t(INFINITY),m_isHit(false)
 	{
 
 	}
-	RGB m_color;
+	Material* m_pMateril;
 	bool m_isHit;
 	float m_t;
-	Point m_hitPoint;
-	Direction m_normal;
+	Vec3 m_hitPoint;
+	Vec3 m_normal;
 }HitRecord;
 class Object
 {
 public:
-	virtual bool Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord);
-
+	Material* m_pMaterial;
 public:
-	Material m_material;
+	virtual bool Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord) = 0;
+
+	virtual HitRecord GetHitRecord(const Vec3& hitPoint) = 0;
 };
-Direction RandomInUnitSphere();
+
 
 

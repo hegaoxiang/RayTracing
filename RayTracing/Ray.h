@@ -3,17 +3,17 @@
 class Ray
 {
 public:
-	Ray(Point orgin, Direction dir) :
+	Ray(Vec3 orgin, Vec3 dir) :
 		m_origin(orgin),
 		m_dir(dir)
 	{
 
 	}
 
-	Point PointAtPara(float t)const;
+	Vec3 PointAtPara(float t)const;
 	
 public:
-	Point m_origin;
-	Direction m_dir;
+	Vec3 m_origin;
+	Vec3 m_dir;
 };
 

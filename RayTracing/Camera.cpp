@@ -3,7 +3,7 @@
 
 using namespace DirectX;
 
-Camera::Camera(Canvas* canvas, Point eyePos, Point target, float dist)
+Camera::Camera(Canvas* canvas, Vec3 eyePos, Vec3 target, float dist)
 {
 	// orgin
 	m_origin = eyePos;
@@ -37,7 +37,7 @@ Ray Camera::GetRay(int x, int y)
 	int dx = x - m_canvas->m_sceenWidth / 2;
 	int dy = y - m_canvas->m_sceenHeight / 2;
 
-	Direction dir;
+	Vec3 dir;
 	XMStoreFloat3(&dir,XMVector3Normalize(right * dx + up * dy - forward * m_viewDist));
 
 	return Ray(m_origin, dir);

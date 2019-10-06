@@ -12,6 +12,9 @@
     <Filter Include="Object">
       <UniqueIdentifier>{3fcf85a6-46e7-40a7-b0e5-fde9c865e78c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Material">
+      <UniqueIdentifier>{4e106451-c773-4cf4-a881-b0813c36f2e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp">
@@ -44,7 +47,18 @@
     <ClCompile Include="Math.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="CG_PPM.cpp" />
+    <ClCompile Include="CG_PPM.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Lambertian.cpp">
+      <Filter>Material</Filter>
+    </ClCompile>
+    <ClCompile Include="Metal.cpp">
+      <Filter>Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -76,6 +90,15 @@
     </ClInclude>
     <ClInclude Include="CG_PPM.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Lambertian.h">
+      <Filter>Material</Filter>
+    </ClInclude>
+    <ClInclude Include="Metal.h">
+      <Filter>Material</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

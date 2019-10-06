@@ -9,9 +9,9 @@ using DirectX::XMFLOAT3;
 using DirectX::XMVECTOR;
 typedef DirectX::XMFLOAT3 Vector3;
 typedef DirectX::XMVECTOR Vector;
-typedef Vector3 Point;
-typedef Vector3 Direction;
-typedef Vector3 RGB;
+typedef Vector3 Vec3;
+typedef Vector3 Vec3;
+typedef Vector3 Vec3;
 
 #include "Canvas.h"
 #include "Camera.h"

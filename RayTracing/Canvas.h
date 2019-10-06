@@ -18,13 +18,13 @@ public:
 	void Display();
 
 	// 给像素点上色
-	void SetPixel(int x,int y,RGB color);
+	void SetPixel(int x,int y,Vec3 color);
 
 public:
 	int m_sceenWidth;
 	int m_sceenHeight;
 
-	RGB m_buffer[MAX_HEIGHT][MAX_WIDTH ] = { };
+	Vec3 m_buffer[MAX_HEIGHT][MAX_WIDTH ] = { };
 	
 };
 

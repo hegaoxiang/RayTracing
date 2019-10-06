@@ -18,7 +18,7 @@ public:
 	{
 		for (auto item : m_buffer)
 		{
-			fill(item.begin(), item.end(), RGB{ 0,0,0 });
+			fill(item.begin(), item.end(), Vec3{ 0,0,0 });
 		}
 	}
 	void Resize(int width, int height)
@@ -26,11 +26,11 @@ public:
 		m_bufferWidth = width;
 		m_bufferHeight = height;
 	}
-	void SetPixel(int x, int y, RGB color);
+	void SetPixel(int x, int y, Vec3 color);
 
 	void Display();
 
-	array<array<RGB, SCREEN_WIDTH>, SCREEN_HEIGHT> m_buffer;
+	array<array<Vec3, SCREEN_WIDTH>, SCREEN_HEIGHT> m_buffer;
 
 	int m_bufferWidth;
 	int m_bufferHeight;
