@@ -16,7 +16,7 @@ void World::SetCamera(Camera& camera)
 
 void World::Render()
 {
-	size_t ns = 100;
+	size_t ns = 50;
 
 	Canvas &canvas = *m_canvas;
 	Ray ray = Ray{ Vec3{0,0,0},Vec3{0,0,-1}};
