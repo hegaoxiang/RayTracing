@@ -1,6 +1,6 @@
 #include "Sphere.h"
 #include"Ray.h"
-
+#include"AABB.h"
 
 bool Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& hitRecord)
 {
@@ -51,4 +51,13 @@ HitRecord Sphere::GetHitRecord(const Vec3& hitPoint)
 	hitRecord.m_normal = (hitPoint - m_orgin).UnitVector();
 	hitRecord.m_pMateril = m_pMaterial;
 	return hitRecord;
+}
+
+AABB Sphere::GenerateBox()
+{
+	Vec3 dist(m_radius,m_radius,m_radius );
+
+	Vec3 min = m_orgin - dist;
+	Vec3 max = m_orgin + dist;
+	return AABB(min,max);
 }

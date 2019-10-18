@@ -20,5 +20,9 @@ public:
 	// 通过 Object 继承
 	virtual HitRecord GetHitRecord(const Vec3& hitPoint) override;
 
+
+	// 通过 Object 继承
+	virtual AABB GenerateBox() override;
+
 };
 

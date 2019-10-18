@@ -51,9 +51,50 @@ Camera::Camera()
 	m_origin = Vec3{ 0.0,0.0,0.0 };
 }
 
+Camera::Camera(Vec3 lookFrom, Vec3 lookAt, Vec3 up, float vfov, float aspect)
+{
+	Vec3 u, v, w;
+
+	float theta = vfov * XM_PI / 180;
+	float halfHeight = tanf(theta / 2);
+	float halfWidth = aspect * halfHeight;
+	m_origin = lookFrom;
+	w = (lookFrom - lookAt).UnitVector();
+	u = Cross(up, w).UnitVector();
+	v = Cross(w, u);
+
+	//m_lower_left_corner = Vec3{ -halfWidth,-halfHeight,-1.0 };
+	m_lower_left_corner = m_origin - halfWidth * u - halfHeight * v - w;
+	m_horizontal = 2 * halfWidth * u;
+	m_vertical = 2 * halfHeight * v;
+}
+
+Camera::Camera(Vec3 lookFrom, Vec3 lookAt, Vec3 up, float vfov, float aspect, float aperture,float focusDist)
+{
+	m_lensRadius = aperture / 2;
+	float theta = vfov * XM_PI / 180;
+	float halfHeight = tanf(theta / 2);
+	float halfWidth = aspect * halfHeight;
+	m_origin = lookFrom;
+	m_forward = (lookFrom - lookAt).UnitVector();
+	m_right = Cross(up, m_forward).UnitVector();
+	m_up = Cross(m_forward, m_right);
+
+	//m_lower_left_corner = Vec3{ -halfWidth,-halfHeight,-1.0 };
+	m_horizontal = 2 * halfWidth * m_right * focusDist;
+	m_vertical = 2 * halfHeight * m_up * focusDist;
+
+	m_lower_left_corner = m_origin - 0.5f * m_horizontal - 0.5f * m_vertical - m_forward * focusDist;
+	
+	 
+}
+
 Ray Camera::GetRay(float u, float v)
 {
+	Vec3 randomDist = m_lensRadius * RandomInUnitSphere();
+	Vec3 offset = randomDist.X() * m_right + randomDist.Y() * m_up;
+
 	Vec3 target = m_lower_left_corner + u * m_horizontal + v * m_vertical;
 
-	return Ray{ m_origin,target };
+	return Ray{ m_origin + offset,target };
 }

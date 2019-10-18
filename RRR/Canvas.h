@@ -2,8 +2,8 @@
 #include<vector>
 #include"Math.h"
 
-constexpr int MAX_WIDTH = 600;
-constexpr int MAX_HEIGHT = 600;
+constexpr int MAX_WIDTH =  1100;
+constexpr int MAX_HEIGHT = 1000;
 
 class Canvas
 {

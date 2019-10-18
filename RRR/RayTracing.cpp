@@ -5,14 +5,21 @@
 
 int main()
 {
-	auto canvas = new Canvas{ 200, 100 };
+	int nx = 200	;
+	int ny = 100;
+	auto canvas = new Canvas{ nx, ny };
 
-	Vec3 eyePos{ 0, 0, 0 };
+	//Vec3 eyePos{ 0, 0, 0 };
+	//
+	//Vec3 target{ 0, 0, 3 };
 
-	Vec3 target{ 0, 0, 3 };
+	Vec3 lookFrom(13, 2, 3);
+	Vec3 lookAt(0, 0, 0);
+	float distToFocus = 10.0f;
+	float aperture = 0.0f;
 
-	auto camera = new Camera();
-	
+	//auto camera = new Camera(Vec3{ -2,2,1 }, Vec3{ 0,0,-1 }, Vec3{ 0,1,0 },20,static_cast<float>(nx)/static_cast<float>(ny));
+	auto camera = new Camera(lookFrom, lookAt, Vec3{ 0,1,0 }, 20, static_cast<float>(nx) / static_cast<float>(ny), aperture, distToFocus);
 	auto world = new World(camera,canvas);
 
 	world->SetCamera(*camera);

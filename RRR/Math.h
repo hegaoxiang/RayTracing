@@ -8,7 +8,7 @@ float drand();
 class Vec3
 {
 	friend float Dot(const Vec3& v1, const Vec3& v2);
-
+	friend Vec3 Cross(const Vec3& v1, const Vec3& v2);
 	friend Vec3 Reflect(const Vec3& v, const Vec3& n);
 public:
 	float X()const
@@ -38,6 +38,7 @@ public:
 	
 	Vec3()
 	{
+		m = XMFLOAT3(0, 0, 0);
 	}
 	Vec3(XMFLOAT3 xmfloat3)
 	{
@@ -46,6 +47,21 @@ public:
 	Vec3(float x, float y, float z)
 	{
 		m = XMFLOAT3{ x,y,z };
+	}
+
+	float operator[](int i)const
+	{
+		switch (i)
+		{
+		case 0:
+			return m.x;
+		case 1:
+			return m.y;
+		case 2:
+			return m.z;
+		default:
+			throw i;
+		}
 	}
 
 	Vec3& operator+=(const Vec3 &v2)
@@ -85,7 +101,7 @@ public:
 	}
 	Vec3& operator/=(const float t)
 	{
-		float k = 1.0 / t;
+		float k = 1.0f / t;
 		m.x *= k;
 		m.y *= k;
 		m.z *= k;
@@ -119,6 +135,7 @@ private:
 };
 
 float Dot(const Vec3& v1, const Vec3& v2);
+Vec3 Cross(const Vec3& v1, const Vec3& v2);
 inline Vec3 operator-(const Vec3& v1, const Vec3& v2)
 {
 	/*auto vv1 = XMLoadFloat3(&v1.GetXMFLOAT3());

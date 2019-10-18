@@ -7,6 +7,8 @@ class Camera
 public:
 	Camera(Canvas* canvas, Vec3 eyePos, Vec3 target,float dist = 1.0f);
 	Camera();
+	Camera(Vec3 lookFrom, Vec3 lookAt, Vec3 up, float vfov, float aspect);
+	Camera(Vec3 lookFrom, Vec3 lookAt, Vec3 up, float vfov, float aspect,float aperture,float focusDist);//É¢½¹Ä£ºý¡±
 	Ray GetRay(float u, float v);
 	
 public:
@@ -25,7 +27,8 @@ public:
 	Vec3 m_lower_left_corner;
 	Vec3 m_horizontal;
 	Vec3 m_vertical;
-	
+
+	float m_lensRadius;
 public:
 
 };

@@ -10,8 +10,17 @@ void CG_PPM::SetPixel(int x, int y, Vec3 color)
 
 void CG_PPM::Display()
 {
-	ofstream file(m_fileName);
-	file << "P3\n" << m_bufferWidth << " " << m_bufferHeight << "\n" <<"255\n";
+	ofstream file;
+	try
+	{
+		file.open(m_fileName);
+		file << "P3\n" << m_bufferWidth << " " << m_bufferHeight << "\n" << "255\n";
+	}
+	catch (const std::exception& e)
+	{
+		return;
+	}
+	
 
 	for (int j = m_bufferHeight - 1; j >= 0; j--)
 	{

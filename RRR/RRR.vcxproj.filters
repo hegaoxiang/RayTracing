@@ -59,6 +59,13 @@
     <ClCompile Include="Metal.cpp">
       <Filter>Material</Filter>
     </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BVHNode.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -99,6 +106,15 @@
     </ClInclude>
     <ClInclude Include="Metal.h">
       <Filter>Material</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BVHNode.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
