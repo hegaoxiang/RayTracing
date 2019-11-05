@@ -5,8 +5,8 @@
 
 using std::string;
 using std::array;
-const int SCREEN_HEIGHT = 1921;
-const int SCREEN_WIDTH = 1081;
+const int SCREEN_HEIGHT = 50;
+const int SCREEN_WIDTH = 50;
 
 class CG_PPM
 {

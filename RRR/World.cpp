@@ -95,15 +95,16 @@ void World::Render()
 			//f();
 			//g_threadPool.AppendTask(f);
 			g_Colors.emplace_back(g_threadPool.enqueue(f));
+			//g_Colors.emplace_back(f());
 		}
 	}
 
 	//g_threadPool.Stop();
-	for (int i = 0; i < canvas.m_sceenWidth; i++)
+	for (__int64 i = 0; i < canvas.m_sceenWidth; i++)
 	{
-		for (int j = 0; j < canvas.m_sceenHeight; j++)
+		for (__int64 j = 0; j < canvas.m_sceenHeight; j++)
 		{
-			canvas.SetPixel(i, j, g_Colors[i * canvas.m_sceenHeight + j].get());
+			canvas.SetPixel(i, j, g_Colors[i * (__int64)canvas.m_sceenHeight + j].get());
 		}
 	}
 }
