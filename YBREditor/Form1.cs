@@ -21,6 +21,7 @@ namespace YBREditor
             {
                 IntPtr hInstance = Marshal.GetHINSTANCE(this.GetType().Module);
                 IntPtr hwnd = this.m_displayPanel.Handle;
+                
                 NativeMethods.EditorMain(hInstance, IntPtr.Zero, hwnd, 10, this.m_displayPanel.Width, this.m_displayPanel.Height);
 
             }

@@ -43,41 +43,47 @@
             this.flowLayoutPanel1.Controls.Add(this.groupBox1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(800, 450);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1067, 585);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 435);
+            this.panel1.Size = new System.Drawing.Size(265, 543);
             this.panel1.TabIndex = 0;
             // 
             // m_displayPanel
             // 
             this.m_displayPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.m_displayPanel.Location = new System.Drawing.Point(209, 3);
+            this.m_displayPanel.Location = new System.Drawing.Point(277, 4);
+            this.m_displayPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.m_displayPanel.Name = "m_displayPanel";
-            this.m_displayPanel.Size = new System.Drawing.Size(399, 435);
+            this.m_displayPanel.Size = new System.Drawing.Size(600, 600);
             this.m_displayPanel.TabIndex = 1;
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(614, 3);
+            this.groupBox1.Location = new System.Drawing.Point(4, 612);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(174, 435);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(232, 544);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 585);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.flowLayoutPanel1.ResumeLayout(false);

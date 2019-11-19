@@ -1,9 +1,16 @@
 #pragma once
 
+#include "FrameBuffer.h"
 class Render2D
 {
 public:
-	static void DrawLine(int x1, int y1, int x2, int y2, unsigned char* image);
+	void DrawLine(int x1, int y1, int x2, int y2);
+	void  DrawCircle(int x, int y, int radius);
+	void SetFrameBuf(const FrameBuffer& frameBuf);
+	FrameBuffer* m_pFrameBuf;
+private:
+	void SetPixel(int x, int y);
+	
 
 };
 

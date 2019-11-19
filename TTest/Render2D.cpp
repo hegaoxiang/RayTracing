@@ -1,9 +1,9 @@
 #include "Render2D.h"
 
-void Render2D::DrawLine(int x1, int y1, int x2, int y2, unsigned char* image)
 
+void Render2D::DrawLine(int x1, int y1, int x2, int y2)
 {
-#pragma region Bresenham
+
 	int dx = x2 - x1;
 	int dy = y2 - y1;
 
@@ -22,12 +22,9 @@ void Render2D::DrawLine(int x1, int y1, int x2, int y2, unsigned char* image)
 	{
 		for (int i = 0; i < step; i++)
 		{
-			int temp = (x * flagX + x1) * 400 * 3 + (y * flagY + y1) * 3;
-			//image.SetPixel(x * flagX + x1, y * flagY + y1, Vec3(180, 180, 180));
-			//SetPixel(dc, x * flagX + x1, y * flagY + y1, RGB(255, 1, 1));
-			image[temp] = 255;
-			image[temp + 1] = 1;
-			image[temp + 2] = 1;
+			
+			SetPixel(x * flagX + x1, y * flagY + y1);
+			
 			x++;
 
 			e = e + dy;
@@ -43,12 +40,8 @@ void Render2D::DrawLine(int x1, int y1, int x2, int y2, unsigned char* image)
 	{
 		for (int i = 0; i < step; i++)
 		{
-			int temp = (x * flagX + x1) * 400 * 3 + (y * flagY + y1) * 3;
-			//image.SetPixel(x * flagX + x1, y * flagY + y1, Vec3(180, 180, 180));
-			//SetPixel(dc, x * flagX + x1, y * flagY + y1, RGB(255, 1, 1));
-			image[temp] = 255;
-			image[temp + 1] = 1;
-			image[temp + 2] = 1;
+			
+			SetPixel(x * flagX + x1, y * flagY + y1);
 			y++;
 
 			e = e + dx;
@@ -61,3 +54,42 @@ void Render2D::DrawLine(int x1, int y1, int x2, int y2, unsigned char* image)
 		}
 	}
 }
+
+void Render2D::DrawCircle(int x, int y, int radius)
+{
+	int x0 = 0;
+	int y0 = radius;
+
+	int d = 1 - radius;
+	while (x0 <= y0)
+	{
+		SetPixel(x + x0, y + y0);
+		SetPixel(x + x0, y + -y0);
+		SetPixel(x + -x0, y + y0);
+		SetPixel(x + -x0, y + -y0);
+		SetPixel(x + y0, y + x0);
+		SetPixel(x + y0, y + -x0);
+		SetPixel(x + -y0, y + x0);
+		SetPixel(x + -y0, y + -x0);
+		
+		if (d < 0)
+			d += 2 * x0 + 3;
+		else
+		{
+			d += 2 * (x0 - y0) + 5;
+			y0--;
+		}
+		x0++;
+	}
+}
+
+void Render2D::SetFrameBuf(const FrameBuffer& frameBuf)
+{
+	m_pFrameBuf = new FrameBuffer(frameBuf);
+}
+
+void Render2D::SetPixel(int x, int y)
+{
+	m_pFrameBuf->SetPixel(x, y);
+}
+

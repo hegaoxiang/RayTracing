@@ -1,5 +1,6 @@
 #pragma once
 #include<windows.h>
+class FrameBuffer;
 class Window
 {
 public:
@@ -11,6 +12,6 @@ public:
 	int m_width;
 	int m_height;
 
-	void Draw(unsigned char* buffer);
+	void Draw(const FrameBuffer& buffer);
 };
 
