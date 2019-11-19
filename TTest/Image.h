@@ -9,6 +9,7 @@ public:
 	int m_width;
 	int m_height;
 	int m_channels;
+	//void FlipV
 };
 
 void BlitBufferRGB(const FrameBuffer& src, Image& dst);

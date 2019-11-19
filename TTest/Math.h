@@ -49,7 +49,21 @@ public:
 		m = XMFLOAT3{ x,y,z };
 	}
 
-	float operator[](int i)const
+	float operator[](int i)const 
+	{
+		switch (i)
+		{
+		case 0:
+			return m.x;
+		case 1:
+			return m.y;
+		case 2:
+			return m.z;
+		default:
+			throw i;
+		}
+	}
+	float& operator[](int i)
 	{
 		switch (i)
 		{
@@ -133,6 +147,8 @@ public:
 private:
 	XMFLOAT3 m;
 };
+
+
 class Vec4
 {
 	

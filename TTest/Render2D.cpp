@@ -90,7 +90,7 @@ void Render2D::SetFrameBuf(const FrameBuffer& frameBuf)
 
 void Render2D::SetPixel(int x, int y,Vec4 color)
 {
-	m_pFrameBuf->SetPixel(x, y, color);
+	m_pFrameBuf->SetPixel(y, x, color);
 }
 
 void Render2D::SetPixel(int x, int y)
