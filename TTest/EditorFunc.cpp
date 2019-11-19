@@ -14,7 +14,7 @@ DllExport int EditorMain(int* instancePtrAddress, int* hPrevInstancePtrAddress, 
 	
 	g_pRender = new Render2D();
 	
-	g_pRender->SetFrameBuf(FrameBuffer(450, 451 ));
+	g_pRender->SetFrameBuf(FrameBuffer(screenWidth, screenHeight,4 ));
 	
 	return 0;
 }
@@ -25,7 +25,7 @@ void WndProc(int* hWndPtrAddress, int msg, int wParam, int lParam)
 DllExport void RenderFrame()
 {
 	//g_pRender->DrawLine(0, 0, 320, 380);
-	g_pRender->DrawCircle(100, 200, 100);
+	g_pRender->DrawCircle(100, 200, 99);
 	g_pWnd->Draw(*g_pRender->m_pFrameBuf);
 	
 }

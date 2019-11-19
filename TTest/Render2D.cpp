@@ -88,8 +88,13 @@ void Render2D::SetFrameBuf(const FrameBuffer& frameBuf)
 	m_pFrameBuf = new FrameBuffer(frameBuf);
 }
 
+void Render2D::SetPixel(int x, int y,Vec4 color)
+{
+	m_pFrameBuf->SetPixel(x, y, color);
+}
+
 void Render2D::SetPixel(int x, int y)
 {
-	m_pFrameBuf->SetPixel(x, y);
+	SetPixel(x, y, Vec4{ 255,1,1,0 });
 }
 

@@ -21,12 +21,16 @@
   <ItemGroup>
     <ClCompile Include="EditorFunc.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Math.cpp" />
     <ClCompile Include="Render2D.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EditorFunc.h" />
     <ClInclude Include="FrameBuffer.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="Math.h" />
     <ClInclude Include="Render2D.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

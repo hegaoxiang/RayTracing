@@ -9,8 +9,8 @@ public:
 	void SetFrameBuf(const FrameBuffer& frameBuf);
 	FrameBuffer* m_pFrameBuf;
 private:
+	void SetPixel(int x, int y, Vec4 color);
 	void SetPixel(int x, int y);
-	
 
 };
 

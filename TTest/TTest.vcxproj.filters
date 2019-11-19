@@ -11,11 +11,15 @@
     <ClCompile Include="Render2D.cpp" />
     <ClCompile Include="EditorFunc.cpp" />
     <ClCompile Include="FrameBuffer.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h" />
     <ClInclude Include="Render2D.h" />
     <ClInclude Include="EditorFunc.h" />
     <ClInclude Include="FrameBuffer.h" />
+    <ClInclude Include="Image.h" />
+    <ClInclude Include="Math.h" />
   </ItemGroup>
 </Project>
