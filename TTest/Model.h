@@ -5,14 +5,16 @@
 class Model
 {
 public:
-	std::vector<Vec3> m_verts;
+
+	std::vector<Vec3f> m_verts;
+	std::vector<Vec3f> m_norms;;
 	std::vector<std::vector<int>> m_faces;
 
 	Model(const char* filename);
 	~Model();
 	int NumVerts();
 	int NumFaces();
-	Vec3 Vert(int i);
+	Vec3f Vert(int i);
 	std::vector<int> Face(int idx);
 };
 

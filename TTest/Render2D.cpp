@@ -5,7 +5,12 @@ using namespace std;
 
 void Render2D::DrawLine(int x1, int y1, int x2, int y2)
 {
+	if (!(y1 >= 0 && y1 < m_pFrameBuf->m_height)) return ;
+	if (!(y2 >= 0 && y2 < m_pFrameBuf->m_height)) return ;
 	
+	if (!(x1 >= 0 && x1 < m_pFrameBuf->m_width))return;
+	if (!(x2 >= 0 && x2 < m_pFrameBuf->m_width))return;
+
 	int dx = x2 - x1;
 	int dy = y2 - y1;
 
@@ -114,7 +119,7 @@ void Render2D::DrawCircle(int x, int y, int radius)
 	}
 }
 
-void Render2D::DrawTriangle(int col0, int row0,  int col1, int row1, int col2 ,int row2 )
+void Render2D::DrawTriangle(int col0, int row0,  int col1, int row1, int col2 ,int row2, Vec4i color)
 {
 	assert(row0 >= 0 && row0 < m_pFrameBuf->m_height);
 	assert(row1 >= 0 && row1 < m_pFrameBuf->m_height);
@@ -122,9 +127,9 @@ void Render2D::DrawTriangle(int col0, int row0,  int col1, int row1, int col2 ,i
 	assert(col0 >= 0 && col0 < m_pFrameBuf->m_width);
 	assert(col1 >= 0 && col1 < m_pFrameBuf->m_width);
 	assert(col2 >= 0 && col2 < m_pFrameBuf->m_width);
-	DrawLine( col0,row0, col1, row1);
-	DrawLine(col1, row1, col2, row2);
-	DrawLine(col2, row2, col0, row0);
+
+	DrawTriangle(Vec2i{ col0,row0 }, Vec2i{ col1,row1 }, Vec2i{ col2,row2 }, color);
+	/*
 	typedef struct Point
 	{
 		int x;
@@ -143,14 +148,50 @@ void Render2D::DrawTriangle(int col0, int row0,  int col1, int row1, int col2 ,i
 		float k;
 		EdgeNode* next;
 	}EdgeNode;
+	typedef struct Box
+	{
+		Point min;
+		Point max;
+	}Box;
 
 	vector<Point> points;
 	points.push_back(Point{ col0,row0 });
 	points.push_back(Point{ col1,row1 });
 	points.push_back(Point{ col2,row2 });
 
-	
+	Box box{ Point{ col0,row0 } ,Point{ col1,row1 } };
 
+	for (auto item : points)
+	{
+		box.max.x = fmax(box.max.x, item.x);
+		box.max.y = fmax(box.max.y, item.y);
+		box.min.x = fmin(box.min.x, item.x);
+		box.min.y = fmin(box.min.y, item.y);
+	}
+
+	for (int r = box.min.y; r <= box.max.y; r++)
+	{
+		for (int c = box.min.x; c <= box.max.x; c++)
+		{
+			
+			Vec3f x(col2 - col0, col1 - col0, col0 - c);
+			Vec3f y(row2 - row0, row1 - row0, row0 - r );
+			auto uv = cross(y, x);
+			if (std::abs(uv[2]) < 1)
+				uv = Vec3f(-1, 1, 1);
+			else
+			{
+				uv.y /= uv.z;
+				uv.x /= uv.z;
+			}
+			
+			if (uv.x >= 0 && uv.y >= 0 && (uv.y + uv.x <= 1))
+			{
+				SetPixel(c, r,color);
+			}
+		}
+	}*/
+	/*
 	// 得到Ymin和Ymax
 	int minY = 2000;
 	int maxY = 0;
@@ -165,13 +206,14 @@ void Render2D::DrawTriangle(int col0, int row0,  int col1, int row1, int col2 ,i
 	
 	
 
+	EdgeNode* currentNode;
 	for (auto iter = points.begin(); iter != points.end(); ++iter)
 	{
 		EdgeNode* temp = new EdgeNode();
 		Point& p1 = *iter;
 		Point& p2 = (iter != points.end() - 1) ? (*(iter + 1)) : (*points.begin());
-
-		EdgeNode* currentNode;
+		if (p2.y == p1.y)continue;
+		
 		// 添加顶点信息
 		if (p1.y > p2.y)
 		{
@@ -220,6 +262,7 @@ void Render2D::DrawTriangle(int col0, int row0,  int col1, int row1, int col2 ,i
 				currentNode->next = temp;
 			}
 		}
+		
 	};
 
 	list<EdgeNode> AET;
@@ -276,7 +319,7 @@ void Render2D::DrawTriangle(int col0, int row0,  int col1, int row1, int col2 ,i
 
 			for (int x = x1.xLow + 0.5; x <= x2.xLow; x++)
 			{
-				SetPixel(x, currentY);
+				SetPixel(x, currentY,color);
 			}
 			// 处理删除
 
@@ -297,8 +340,42 @@ void Render2D::DrawTriangle(int col0, int row0,  int col1, int row1, int col2 ,i
 			}
 		}
 
-	}
+	}*/
 	
+}
+
+void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, Vec4i color)
+{
+	mat<3, 2, float> pts2;
+
+
+	vector<Vec2f> points;
+	points.push_back(v0);
+	points.push_back(v1);
+	points.push_back(v2);
+
+	Vec2f bboxmin(v0.x,v0.y ), bboxmax(v1.x,v1.y);
+
+	for (auto item : points)
+	{
+		bboxmax.x = fmax(bboxmax.x, item.x);
+		bboxmax.y = fmax(bboxmax.y, item.y);
+		bboxmin.x = fmin(bboxmin.x, item.x);
+		bboxmin.y = fmin(bboxmin.y, item.y);
+	}
+
+	
+	Vec2i P;
+	for (P.x = bboxmin.x; P.x <= bboxmax.x; P.x++) {
+		for (P.y = bboxmin.y; P.y <= bboxmax.y; P.y++) {
+			Vec3f bc_screen = barycentric(v0, v1, v2, P);
+			
+			
+			
+			if (bc_screen.x < 0 || bc_screen.y < 0 || bc_screen.z<0 ) continue;
+				SetPixel(P.x,P.y ,color);
+		}
+	}
 }
 
 void Render2D::SetFrameBuf(const FrameBuffer& frameBuf)
@@ -306,13 +383,27 @@ void Render2D::SetFrameBuf(const FrameBuffer& frameBuf)
 	m_pFrameBuf = new FrameBuffer(frameBuf);
 }
 
-void Render2D::SetPixel(int x, int y,Vec4 color)
+Vec3f Render2D::barycentric(Vec2f A, Vec2f B, Vec2f C, Vec2f P)
 {
-	m_pFrameBuf->SetPixel(y, x, color);
+	Vec3f s[2];
+	for (int i = 2; i--; ) {
+		s[i].x = C[i] - A[i];
+		s[i].y = B[i] - A[i];
+		s[i].z = A[i] - P[i];
+	}
+	Vec3f u = cross(s[0], s[1]);
+	if (std::abs(u[2]) > 1e-2) // dont forget that u[2] is integer. If it is zero then triangle ABC is degenerate
+		return Vec3f(1.f - (u.x + u.y) / u.z, u.y / u.z, u.x / u.z);
+	return Vec3f(-1, 1, 1); // in this case generate negative coordinates, it will be thrown away by the rasterizator
 }
 
-void Render2D::SetPixel(int x, int y)
+void Render2D::SetPixel(int col, int row,Vec4i color)
 {
-	SetPixel(x, y, Vec4{ 255,1,1,0 });
+	m_pFrameBuf->SetPixel(row, col, color);
+}
+
+void Render2D::SetPixel(int col, int row)
+{
+	SetPixel(col, row, Vec4i( 255,1,1,255 ));
 }
 

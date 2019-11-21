@@ -7,12 +7,12 @@ FrameBuffer::FrameBuffer( int width, int height,int channels)
 }
 
 
-void FrameBuffer::SetPixel(int row, int col, Vec4 color)
+void FrameBuffer::SetPixel(int row, int col, Vec4i color)
 {
 	m_buffer[row * m_width  + col] = color;
 }
 
-const Vec4 FrameBuffer::GetPixel(int row, int col)const
+const Vec4i FrameBuffer::GetPixel(int row, int col)const
 {
 	return m_buffer[row * m_width + col];
 }

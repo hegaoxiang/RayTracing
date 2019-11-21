@@ -16,19 +16,29 @@ Model::Model(const char* filename)
 			std::istringstream iss(line);
 			if (line.substr(0, 2) == "v ") {
 				iss >> trash;
-				Vec3 v;
+				Vec3f v;
 				for (int i = 0; i < 3; i++) 
 					iss >> v[i];
 				m_verts.push_back(v);
+			}
+			if (line.substr(0, 3) == "vn ") {
+				iss >> trash;
+				Vec3f n;
+				for (int i = 0; i < 3; i++)
+					iss >> n[i];
+				m_norms.push_back(n);
 			}
 			else if (line.substr(0, 2) == "f ") {
 				iss >> trash;
 				std::vector<int> f;
 				int idx, itrash;
+				Vec3f norm;
 				while (iss >> idx >> trash >> itrash >> trash >> itrash) {
 					idx--; // in wavefront obj all indices start at 1, not zero
 					f.push_back(idx);
+					f.push_back(itrash);
 				}
+				
 				m_faces.push_back(f);
 			}
 		}
@@ -53,7 +63,7 @@ int Model::NumFaces()
 	return (int)m_faces.size();
 }
 
-Vec3 Model::Vert(int i)
+Vec3f Model::Vert(int i)
 {
 	return m_verts[i];
 }
