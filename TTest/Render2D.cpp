@@ -3,7 +3,7 @@
 #include<vector>
 using namespace std;
 
-void Render2D::DrawLine(int x1, int y1, int x2, int y2)
+void Render2D::DrawLine(int x1, int y1, int x2, int y2,Vec4i color)
 {
 	if (!(y1 >= 0 && y1 < m_pFrameBuf->m_height)) return ;
 	if (!(y2 >= 0 && y2 < m_pFrameBuf->m_height)) return ;
@@ -30,7 +30,7 @@ void Render2D::DrawLine(int x1, int y1, int x2, int y2)
 		for (int i = 0; i < step; i++)
 		{
 			
-			SetPixel(x * flagX + x1, y * flagY + y1);
+			SetPixel(x * flagX + x1, y * flagY + y1, color);
 			
 			x++;
 
@@ -48,7 +48,7 @@ void Render2D::DrawLine(int x1, int y1, int x2, int y2)
 		for (int i = 0; i < step; i++)
 		{
 			
-			SetPixel(x * flagX + x1, y * flagY + y1);
+			SetPixel(x * flagX + x1, y * flagY + y1, color);
 			y++;
 
 			e = e + dx;
@@ -370,8 +370,6 @@ void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, Vec4i color)
 		for (P.y = bboxmin.y; P.y <= bboxmax.y; P.y++) {
 			Vec3f bc_screen = barycentric(v0, v1, v2, P);
 			
-			
-			
 			if (bc_screen.x < 0 || bc_screen.y < 0 || bc_screen.z<0 ) continue;
 				SetPixel(P.x,P.y ,color);
 		}
@@ -404,6 +402,6 @@ void Render2D::SetPixel(int col, int row,Vec4i color)
 
 void Render2D::SetPixel(int col, int row)
 {
-	SetPixel(col, row, Vec4i( 255,1,1,255 ));
+	SetPixel(col, row, Vec4i( 255,0,0,255 ));
 }
 

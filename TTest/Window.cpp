@@ -40,6 +40,10 @@ void Window::PresentSurface()
 }
 void Window::Draw(const FrameBuffer& buffer)
 {
-	BlitBufferRGB(buffer, *m_surface);
+	BlitBufferBGR(buffer, *m_surface);
+	int a = m_surface->m_pImage[0];
+	int b = m_surface->m_pImage[0];
+	int c = m_surface->m_pImage[0];
+	int aa = m_surface->m_pImage[0];
 	PresentSurface();
 }

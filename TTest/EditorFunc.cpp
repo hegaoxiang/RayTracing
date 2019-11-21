@@ -116,6 +116,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void RenderFrame()
 {
+	//g_pRender->DrawLine(5, 5, 200, 5);
+	//g_pRender->DrawLine(5, 5, 5, 400);
 	auto screen = g_pRender->m_pFrameBuf;
 	
 	for (int i = 0; i < model->NumFaces(); i++) {
@@ -137,11 +139,11 @@ void RenderFrame()
 		norm = norm.normalize();
 		//auto n = (worldCoords[1] - worldCoords[0]) ^ (worldCoords[2] - worldCoords[0]);
 		//n = n.normalize();
-		auto intensity = norm * Vec3f{ 0,0,-1 };
+		auto intensity = norm * Vec3f{ 0,0,1 };
 		if (intensity > 0)
 		{
 			
-			g_pRender->DrawLine(screenCoords[0].x, screenCoords[0].y, screenCoords[0].x + norm.x*20, screenCoords[0].y + norm.y*20);
+			g_pRender->DrawLine(screenCoords[0].x, screenCoords[0].y, screenCoords[0].x + norm.x * 20, screenCoords[0].y + norm.y * 20,Vec4i{ 0,0,255,255 });
 
 			//g_pRender->DrawTriangle(screenCoords[0].x, screenCoords[0].y, screenCoords[1].x, screenCoords[1].y, screenCoords[2].x, screenCoords[2].y, Vec4f{ intensity * 255,intensity * 255, intensity * 255, 255 });
 			//g_pRender->DrawTriangle(screenCoords[0], screenCoords[1], screenCoords[2], Vec4i(n.x * 255,n.y * 255, n.z * 255, 255 ));
@@ -152,8 +154,11 @@ void RenderFrame()
 	}
 	
 	//cross((Vec3f[2] - worldCoords[0]), (worldCoords[1] - worldCoords[0]));
-	//g_pRender->DrawTriangle(0, 0, 200, 200, 400, 0, Vec4i(255, 127, 127, 255));;
-	//g_pRender->DrawLine(0, 0, 200,200);
+
+	Vec3f n = { 0,0,1 };
+	auto i = n * Vec3f{ 0,0,1 };
+	g_pRender->DrawTriangle(0, 0, 200, 200, 400, 0, Vec4i(i * 255, i * 255, i * 255, 255));;
+	g_pRender->DrawLine(0, 0, 200,200, Vec4i{ 0,0,255,255 });
 	//g_pRender->DrawLine(400, 0, 200, 200);
 	//g_pRender->DrawLine(0, 0, 400, 0);
 	

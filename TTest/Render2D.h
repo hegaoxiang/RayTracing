@@ -5,7 +5,7 @@
 class Render2D
 {
 public:
-	void DrawLine(int x1, int y1, int x2, int y2);
+	void DrawLine(int x1, int y1, int x2, int y2,Vec4i color);
 	void  DrawCircle(int x, int y, int radius);
 	void DrawTriangle(int x0,int y0,int x1,int y1,int x2,int y2,Vec4i color);
 	void DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, Vec4i color);

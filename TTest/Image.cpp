@@ -24,10 +24,14 @@ void BlitBufferRGB(const FrameBuffer& src, Image& dst)
 		for (c = 0; c < width; c++) {
 			int flipped_r = src.m_height - 1 - r;
 			Vec4i src_value = src.GetPixel( flipped_r, c);
+			if (flipped_r == 0 && c == 0)
+			{
+				int a = 1;
+			}
 			unsigned char* dst_pixel = dst.GetPixel( r, c);
-			dst_pixel[0] = float2uchar(src_value.x);  /* red */
-			dst_pixel[1] = float2uchar(src_value.y);  /* green */
-			dst_pixel[2] = float2uchar(src_value.z);  /* blue */
+			dst_pixel[0] = (src_value.x);  /* red */
+			dst_pixel[1] = (src_value.y);  /* green */
+			dst_pixel[2] = (src_value.z);  /* blue */
 		}
 	}
 }
@@ -43,11 +47,15 @@ void BlitBufferBGR(const FrameBuffer& src, Image& dst)
 	for (r = 0; r < height; r++) {
 		for (c = 0; c < width; c++) {
 			int flipped_r = src.m_height - 1 - r;
+			if (flipped_r == 0 && c == 0)
+			{
+				int a = 1;
+			}
 			Vec4i src_value = src.GetPixel(flipped_r, c);
 			unsigned char* dst_pixel = dst.GetPixel(r, c);
-			dst_pixel[0] = float2uchar(src_value.z);  /* blue */
-			dst_pixel[1] = float2uchar(src_value.y);  /* green */
-			dst_pixel[2] = float2uchar(src_value.x);  /* red */
+			dst_pixel[0] = (src_value.z);  /* blue */
+			dst_pixel[1] = (src_value.y);  /* green */
+			dst_pixel[2] = (src_value.x);  /* red */
 		}
 	}
 }

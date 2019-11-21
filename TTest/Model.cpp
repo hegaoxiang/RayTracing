@@ -22,7 +22,7 @@ Model::Model(const char* filename)
 				m_verts.push_back(v);
 			}
 			if (line.substr(0, 3) == "vn ") {
-				iss >> trash;
+				iss >> trash>>trash;
 				Vec3f n;
 				for (int i = 0; i < 3; i++)
 					iss >> n[i];
@@ -35,6 +35,7 @@ Model::Model(const char* filename)
 				Vec3f norm;
 				while (iss >> idx >> trash >> itrash >> trash >> itrash) {
 					idx--; // in wavefront obj all indices start at 1, not zero
+					itrash--;
 					f.push_back(idx);
 					f.push_back(itrash);
 				}
