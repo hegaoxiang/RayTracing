@@ -402,6 +402,7 @@ void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, FrameBuffer& zBuffer, 
 			//Vec4i(zValue,0,0,0) as zBuffer
 			if (zBuffer.GetPixel(bc_screen.y, bc_screen.x).x < bc_screen.z)
 			{
+
 				SetPixel(P.x, P.y, color);
 				zBuffer.SetPixel(bc_screen.y, bc_screen.x, Vec4i(bc_screen.z, 0, 0, 0));
 			}
