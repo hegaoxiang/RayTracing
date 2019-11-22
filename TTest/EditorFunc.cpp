@@ -119,7 +119,7 @@ void RenderFrame()
 	//g_pRender->DrawLine(5, 5, 200, 5);
 	//g_pRender->DrawLine(5, 5, 5, 400);
 	auto screen = g_pRender->m_pFrameBuf;
-	
+	FrameBuffer zBuffer(g_pRender->m_pFrameBuf->m_width, g_pRender->m_pFrameBuf->m_height, g_pRender->m_pFrameBuf->m_channels);
 	for (int i = 0; i < model->NumFaces(); i++) {
 		
 		std::vector<int> face = model->Face(i);
@@ -147,7 +147,7 @@ void RenderFrame()
 
 			//g_pRender->DrawTriangle(screenCoords[0].x, screenCoords[0].y, screenCoords[1].x, screenCoords[1].y, screenCoords[2].x, screenCoords[2].y, Vec4f{ intensity * 255,intensity * 255, intensity * 255, 255 });
 			//g_pRender->DrawTriangle(screenCoords[0], screenCoords[1], screenCoords[2], Vec4i(n.x * 255,n.y * 255, n.z * 255, 255 ));
-			g_pRender->DrawTriangle(screenCoords[0], screenCoords[1], screenCoords[2], Vec4i(intensity * 255, intensity * 255, intensity * 255, 255));
+			g_pRender->DrawTriangle(screenCoords[0], screenCoords[1], screenCoords[2], zBuffer, Vec4i(intensity * 255, intensity * 255, intensity * 255, 255));
 
 		}
 		
@@ -163,4 +163,5 @@ void RenderFrame()
 	//g_pRender->DrawLine(0, 0, 400, 0);
 	*/
 	g_pWnd->Draw(*g_pRender->m_pFrameBuf);
+	//g_pRender->m_pFrameBuf->Reset();
 }

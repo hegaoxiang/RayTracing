@@ -346,9 +346,7 @@ void Render2D::DrawTriangle(int col0, int row0,  int col1, int row1, int col2 ,i
 
 void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, Vec4i color)
 {
-	mat<3, 2, float> pts2;
-
-
+	
 	vector<Vec2f> points;
 	points.push_back(v0);
 	points.push_back(v1);
@@ -372,6 +370,41 @@ void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, Vec4i color)
 			
 			if (bc_screen.x < 0 || bc_screen.y < 0 || bc_screen.z<0 ) continue;
 				SetPixel(P.x,P.y ,color);
+		}
+	}
+}
+
+void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, FrameBuffer& zBuffer, Vec4i color)
+{
+
+	vector<Vec2f> points;
+	points.push_back(v0);
+	points.push_back(v1);
+	points.push_back(v2);
+
+	Vec2f bboxmin(v0.x, v0.y), bboxmax(v1.x, v1.y);
+
+	for (auto item : points)
+	{
+		bboxmax.x = fmax(bboxmax.x, item.x);
+		bboxmax.y = fmax(bboxmax.y, item.y);
+		bboxmin.x = fmin(bboxmin.x, item.x);
+		bboxmin.y = fmin(bboxmin.y, item.y);
+	}
+
+
+	Vec2i P;
+	for (P.x = bboxmin.x; P.x <= bboxmax.x; P.x++) {
+		for (P.y = bboxmin.y; P.y <= bboxmax.y; P.y++) {
+			Vec3f bc_screen = barycentric(v0, v1, v2, P);
+
+			if (bc_screen.x < 0 || bc_screen.y < 0 || bc_screen.z < 0) continue;
+			//Vec4i(zValue,0,0,0) as zBuffer
+			if (zBuffer.GetPixel(bc_screen.y, bc_screen.x).x < bc_screen.z)
+			{
+				SetPixel(P.x, P.y, color);
+				zBuffer.SetPixel(bc_screen.y, bc_screen.x, Vec4i(bc_screen.z, 0, 0, 0));
+			}
 		}
 	}
 }

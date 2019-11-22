@@ -4,9 +4,15 @@
 class FrameBuffer
 {
 public:
+
 	// RBG
 	FrameBuffer(int width,int height,int channels);
 	~FrameBuffer() { ; }
+	
+	void Reset() { 
+		// TODO
+		//m_buffer.clear(); 
+};
 	void SetPixel(int row, int col,Vec4i kcolor);
 	const Vec4i GetPixel(int row, int col) const;
 	
