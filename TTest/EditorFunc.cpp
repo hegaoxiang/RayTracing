@@ -7,7 +7,7 @@
 #define TEST MessageBox(NULL, L"test", L"se", MB_OK)
 Window* g_pWnd;
 Render2D* g_pRender;
-auto model = new Model("D:\\OBJ\\african_head.obj");
+auto model = new Model("C:\\Users\\12976\\source\\repos\\hegaoxiang\\RayTracing\\TTest\\123.obj");
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPWSTR    lpCmdLine,
@@ -143,7 +143,7 @@ void RenderFrame()
 		if (intensity > 0)
 		{
 			
-			g_pRender->DrawLine(screenCoords[0].x, screenCoords[0].y, screenCoords[0].x + norm.x * 20, screenCoords[0].y + norm.y * 20,Vec4i{ 0,0,255,255 });
+			//g_pRender->DrawLine(screenCoords[0].x, screenCoords[0].y, screenCoords[0].x + norm.x * 20, screenCoords[0].y + norm.y * 20,Vec4i{ 0,0,255,255 });
 
 			//g_pRender->DrawTriangle(screenCoords[0].x, screenCoords[0].y, screenCoords[1].x, screenCoords[1].y, screenCoords[2].x, screenCoords[2].y, Vec4f{ intensity * 255,intensity * 255, intensity * 255, 255 });
 			//g_pRender->DrawTriangle(screenCoords[0], screenCoords[1], screenCoords[2], Vec4i(n.x * 255,n.y * 255, n.z * 255, 255 ));
@@ -154,13 +154,13 @@ void RenderFrame()
 	}
 	
 	//cross((Vec3f[2] - worldCoords[0]), (worldCoords[1] - worldCoords[0]));
-
+	/*
 	Vec3f n = { 0,0,1 };
 	auto i = n * Vec3f{ 0,0,1 };
 	g_pRender->DrawTriangle(0, 0, 200, 200, 400, 0, Vec4i(i * 255, i * 255, i * 255, 255));;
 	g_pRender->DrawLine(0, 0, 200,200, Vec4i{ 0,0,255,255 });
 	//g_pRender->DrawLine(400, 0, 200, 200);
 	//g_pRender->DrawLine(0, 0, 400, 0);
-	
+	*/
 	g_pWnd->Draw(*g_pRender->m_pFrameBuf);
 }
