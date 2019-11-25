@@ -147,7 +147,7 @@ void RenderFrame()
 
 			//g_pRender->DrawTriangle(screenCoords[0].x, screenCoords[0].y, screenCoords[1].x, screenCoords[1].y, screenCoords[2].x, screenCoords[2].y, Vec4f{ intensity * 255,intensity * 255, intensity * 255, 255 });
 			//g_pRender->DrawTriangle(screenCoords[0], screenCoords[1], screenCoords[2], Vec4i(n.x * 255,n.y * 255, n.z * 255, 255 ));
-			g_pRender->DrawTriangle(screenCoords[0], screenCoords[1], screenCoords[2], zBuffer, Vec4i(intensity * 255, intensity * 255, intensity * 255, 255));
+			g_pRender->DrawTriangle(Vec3f(screenCoords[0].x,screenCoords[0].y,worldCoords[0].z), Vec3f(screenCoords[1].x, screenCoords[1].y, worldCoords[1].z), Vec3f(screenCoords[2].x, screenCoords[2].y, worldCoords[2].z), zBuffer, Vec4i(intensity * 255, intensity * 255, intensity * 255, 255));
 
 		}
 		

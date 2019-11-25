@@ -366,7 +366,7 @@ void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, Vec4i color)
 	Vec2i P;
 	for (P.x = bboxmin.x; P.x <= bboxmax.x; P.x++) {
 		for (P.y = bboxmin.y; P.y <= bboxmax.y; P.y++) {
-			Vec3f bc_screen = barycentric(v0, v1, v2, P);
+			Vec3f bc_screen = Barycentric(v0, v1, v2, P);
 			
 			if (bc_screen.x < 0 || bc_screen.y < 0 || bc_screen.z<0 ) continue;
 				SetPixel(P.x,P.y ,color);
@@ -374,10 +374,10 @@ void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, Vec4i color)
 	}
 }
 
-void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, FrameBuffer& zBuffer, Vec4i color)
+void Render2D::DrawTriangle(Vec3f v0, Vec3f v1, Vec3f v2, FrameBuffer& zBuffer, Vec4i color)
 {
 
-	vector<Vec2f> points;
+	vector<Vec3f> points;
 	points.push_back(v0);
 	points.push_back(v1);
 	points.push_back(v2);
@@ -394,17 +394,19 @@ void Render2D::DrawTriangle(Vec2i v0, Vec2i v1, Vec2i v2, FrameBuffer& zBuffer, 
 
 
 	Vec2i P;
+
 	for (P.x = bboxmin.x; P.x <= bboxmax.x; P.x++) {
 		for (P.y = bboxmin.y; P.y <= bboxmax.y; P.y++) {
-			Vec3f bc_screen = barycentric(v0, v1, v2, P);
-
+			Vec3f bc_screen = Barycentric(v0, v1, v2, P);
+			auto zValue = v0.z * bc_screen.x + v1.z * bc_screen.y + v2.z * bc_screen.z;
 			if (bc_screen.x < 0 || bc_screen.y < 0 || bc_screen.z < 0) continue;
 			//Vec4i(zValue,0,0,0) as zBuffer
-			if (zBuffer.GetPixel(bc_screen.y, bc_screen.x).x < bc_screen.z)
+			zValue *= 1000000;
+			if (zBuffer.GetPixel(P.y, P.x).x < zValue)
 			{
 
 				SetPixel(P.x, P.y, color);
-				zBuffer.SetPixel(bc_screen.y, bc_screen.x, Vec4i(bc_screen.z, 0, 0, 0));
+				zBuffer.SetPixel(P.y, P.x, Vec4i(zValue, 0, 0, 0));
 			}
 		}
 	}
@@ -415,7 +417,7 @@ void Render2D::SetFrameBuf(const FrameBuffer& frameBuf)
 	m_pFrameBuf = new FrameBuffer(frameBuf);
 }
 
-Vec3f Render2D::barycentric(Vec2f A, Vec2f B, Vec2f C, Vec2f P)
+Vec3f Render2D::Barycentric(Vec2f A, Vec2f B, Vec2f C, Vec2f P)
 {
 	Vec3f s[2];
 	for (int i = 2; i--; ) {
@@ -423,10 +425,18 @@ Vec3f Render2D::barycentric(Vec2f A, Vec2f B, Vec2f C, Vec2f P)
 		s[i].y = B[i] - A[i];
 		s[i].z = A[i] - P[i];
 	}
+	// uAC+vAB+PA=0
+	// u_v_1
 	Vec3f u = cross(s[0], s[1]);
 	if (std::abs(u[2]) > 1e-2) // dont forget that u[2] is integer. If it is zero then triangle ABC is degenerate
 		return Vec3f(1.f - (u.x + u.y) / u.z, u.y / u.z, u.x / u.z);
 	return Vec3f(-1, 1, 1); // in this case generate negative coordinates, it will be thrown away by the rasterizator
+}
+
+Vec3f Render2D::Barycentric(Vec3f A, Vec3f B, Vec3f C, Vec2f P)
+{
+
+	return Barycentric(Vec2f{ A.x,A.y }, Vec2f{ B.x,B.y }, Vec2f{C.x,C.y},P);
 }
 
 void Render2D::SetPixel(int col, int row,Vec4i color)
